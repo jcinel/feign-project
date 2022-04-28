@@ -1,5 +1,6 @@
 package com.example.cats.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +12,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-public class PostDTO {
+public class FactsDTO {
 
-    public UUID factID;
-    public Number v;
-    public UUID userID;
+    @JsonProperty("_id")
+    public String factID;
+
+    @JsonProperty("_v")
+    public int v;
+
+    @JsonProperty("user")
+    public String userID;
+
+    @JsonProperty("text")
     public String fact;
 }
