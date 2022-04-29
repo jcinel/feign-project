@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum FactsErrorCode {
-    UNAUTHORIZED("001");
+    UNAUTHORIZED("001"),
+    UNAVAILABLE("010");
 
     private final String code;
 

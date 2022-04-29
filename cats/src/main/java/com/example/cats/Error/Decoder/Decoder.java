@@ -1,8 +1,5 @@
 package com.example.cats.Error.Decoder;
-import com.example.cats.Error.Exception.FactsErrorCode;
-import com.example.cats.Error.Exception.FactsException;
-import com.example.cats.Error.Exception.FactsUnexpectedError;
-import com.example.cats.Error.Exception.FactsUnknownError;
+import com.example.cats.Error.Exception.*;
 import com.example.cats.Error.Response.FactsErrorResponse;
 import feign.Response;
 import com.google.gson.Gson;
@@ -33,13 +30,15 @@ public class Decoder implements ErrorDecoder {
             errorResponse = buildFactsErrorResponse(response);
             errorCode = FactsErrorCode.getByCode(errorResponse.getErrorCode());
         } catch (Exception ex) {
-            throw new FactsUnexpectedError(ex);
+            throw new FactsUnexpectedErrorException(ex);
         }
 
         if (errorCode.isPresent()) {
+            if (errorCode.get() == FactsErrorCode.UNAVAILABLE)
+                throw new FactsServiceUnavailableException(errorCode.get());
             throw new FactsException(errorCode.get());
         } else {
-            throw new FactsUnknownError(errorResponse.getErrorCode());
+            throw new FactsUnknownErrorException(errorResponse.getErrorCode());
         }
     }
 

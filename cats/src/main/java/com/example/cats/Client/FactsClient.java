@@ -9,5 +9,5 @@ import java.util.List;
 @FeignClient(name = "fact", url = "https://cat-fact.herokuapp.com")
 public interface FactsClient {
     @GetMapping(value = "/facts/random?amount=5")
-    List<FactsDTO> getAllPosts();
+    List<FactsDTO> getFacts();
 }

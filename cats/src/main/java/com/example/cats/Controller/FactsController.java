@@ -1,7 +1,7 @@
 package com.example.cats.Controller;
 
-import com.example.cats.Client.FactsClient;
 import com.example.cats.DTO.FactsDTO;
+import com.example.cats.Service.FactsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("/facts")
 public class FactsController {
 
-    private FactsClient postClient;
+    private FactsService factsService;
 
     @GetMapping
-    public List<FactsDTO> getAllPosts() {
-        return postClient.getAllPosts();
+    public List<FactsDTO> getFacts() {
+        return factsService.getFacts();
     }
 }
